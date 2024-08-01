@@ -21,6 +21,14 @@ class APIProvider extends GetxService{
   APIProvider(){
     _dio=dio.Dio(
       dio.BaseOptions(
+          headers: {
+            'Cookie': cookies??cookies,
+            //'Authorization' : token?? 'Bearer ${token}',
+            'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjNlMGU3ZDA4NDY2MzcxNDE1NDc5OTVlZDVlZjJiYjMwMTRlMGI4OWFmNThhZTA3NTRkMmFiYzEzYzQwMjgzZDcxMDRkODVlN2YxYTM2ZjUiLCJpYXQiOjE3MjI0NDc3ODUuMjcyMTU4LCJuYmYiOjE3MjI0NDc3ODUuMjcyMTY1LCJleHAiOjE3NTM5ODM3ODQuODMyMjIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.JORNyQUX_C9RxZClziMVTTBpbliJDLKh_bIsPwLQqdAnz0NxmFay4eWdnQkhoO-Dm0oJHmGJ350K_uGrD8kb5FQq7Iwsf9XNs1oPiuhUzciicuTW6WoDU-h55mD6zIxn1u-kQKsUWckTH_PzOVyZy70LiZnkG4b8flQpeHInWrrB-E0QPK_8LRSlY_Q-r-O7tNfcPVBmmk-GgItlSzsFEi42vSfnfWmfgrI_2pCXllQmqJmGb6jWzV5jCbG4s9Wu4733IuGbrfLW3pT5TEQoUgjaPKa0NgY1XfTDSgimm5c-6VVNr06HuYDsKC0j-fUG_IU89uN4SjY-63WRwPXkEzzugXVph4-XLjLAlKMuNvg9gLDAgVqvMvJEVMeayYT7SLPk9sozQnbbWP4yE9ykoguIurvJZb9hXM-qgxHN1EapgU9MnGacSDzl3vIY5FZsEaC0bhL_adiuqS6T3WpvOOFZ2dABXIkJphxBDwBKVV9TLpK502I_NfUdluJhSSvgOXTpVrg3h9LfEXaHl5WGPaPXG4OpvkB6EvLTlnIm_W2_3svmeTXdB6Fsn0y9vI5gO3G7KUoiCDZelmXWo0du_BQU2brT5__MwOh1OjCUGtoyIkLyRr126Fzm4wSbvOXh0BW8R18j-4ZzTnznV1kWism-WImB-VF-NKfzBUTbwoo',
+
+      'Accept':"application/json",
+            'Content-Type':"application/json",
+          },
         //  baseUrl: "https://reqres.in/api/",
         //  connectTimeout: Duration(seconds: 30),
         // 10 minutes in milliseconds
@@ -48,16 +56,16 @@ class APIProvider extends GetxService{
     // _dio.httpClientAdapter=adapter;
 
     print(5);
-    if (cookies!=null|| token!=null ){
-      _dio.options = dio.BaseOptions(
-          headers: {
-            'Cookie': cookies??cookies,
-            'Authorization' : token?? 'Bearer ${token}',
-            'Accept':"application/json",
-            'Content-Type':"application/json",
-          }
-      );
-    }
+    // if (cookies!=null|| token!=null ){
+    //   _dio.options = dio.BaseOptions(
+    //       headers: {
+    //         'Cookie': cookies??cookies,
+    //         'Authorization' : token?? 'Bearer ${token}',
+    //         'Accept':"application/json",
+    //         'Content-Type':"application/json",
+    //       }
+    //   );
+    // }
     print(6);
     dio.Response response=await _dio.post(method,queryParameters: queryParams,data: body);
     print(7);
