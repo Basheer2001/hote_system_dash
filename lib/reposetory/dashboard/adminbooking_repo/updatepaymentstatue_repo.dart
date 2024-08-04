@@ -18,9 +18,9 @@ class UpdateBookingStatueRepo extends GetxService {
         "${APIProvider.url}dashboard/bookings/$bookingId/payment-status",
         {},
         {'status': status},
-        headers: {
-          'Authorization': 'Bearer ${myServices.sharedPreferences.getString("token")}',
-        },
+        // headers: {
+        //   'Authorization': 'Bearer ${myServices.sharedPreferences.getString("token")}',
+        // },
       );
 
       if (response.statusCode == 200) {

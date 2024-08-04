@@ -10,24 +10,26 @@ class UpdateRoomRepo extends GetxService {
 
   Future<AppResponse<void>> updateRoom({
     required int roomId,
-    required int floor,
+    required String floor,
     required String status,
     required int roomNumber,
     required int roomClassId,
     required double averageRating,
-    required String photo,
+   // required String photo,
+    required String view,
   }) async {
     try {
     dio.Response response = await apiProvider.postRequest(
     "${APIProvider.url}dashboard/update/room/$roomId",
     {},
     jsonEncode({
-    "floor": floor,
+    "floor": floor.toString(),
     "status": status,
-    "room_number": roomNumber,
-    "room_class_id": roomClassId,
-    "average_rating": averageRating,
-    "photo": photo,
+    "room_number": roomNumber.toString(),
+    "room_class_id": roomClassId.toString(),
+    "average_rating": averageRating.toString(),
+    //"photo": photo,
+      "view" : view
     }),
     );
 

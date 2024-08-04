@@ -11,6 +11,7 @@ class AdminUpdateRoom extends StatelessWidget {
   final TextEditingController roomClassIdController = TextEditingController();
   final TextEditingController averageRatingController = TextEditingController();
   final TextEditingController photoController = TextEditingController();
+  final TextEditingController viewController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,18 +73,27 @@ class AdminUpdateRoom extends StatelessWidget {
                 labelText: 'Photo URL',
                 border: OutlineInputBorder(),
               ),
+            ),SizedBox(height: 16.0),
+            TextField(
+              controller: viewController,
+              decoration: InputDecoration(
+                labelText: 'view',
+                border: OutlineInputBorder(),
+              ),
             ),
             SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () {
                 controller.updateRoom(
                   roomId: 2, // Replace with the actual room ID
-                  floor: int.parse(floorController.text),
+                 // floor: int.parse(floorController.text),
+                  floor: floorController.text,
                   status: statusController.text,
                   roomNumber: int.parse(roomNumberController.text),
                   roomClassId: int.parse(roomClassIdController.text),
                   averageRating: double.parse(averageRatingController.text),
-                  photo: photoController.text,
+                 // photo: photoController.text,
+                  view: viewController.text,
                 );
               },
               style: ButtonStyle(

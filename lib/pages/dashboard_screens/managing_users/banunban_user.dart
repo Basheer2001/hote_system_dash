@@ -43,8 +43,8 @@ class BanUnbanUser extends StatelessWidget {
                 onPressed: () {
                   String userId = userIdController.text;
                   if (userId.isNotEmpty) {
-                    int id = int.parse(userId);
-                    banUnbancontroller.banUser(id);
+                    //int id = int.parse(userId);
+                    banUnbancontroller.banUser(userId);
                   } else {
                     Get.snackbar(
                       'Error',
@@ -73,6 +73,10 @@ class BanUnbanUser extends StatelessWidget {
                 onPressed: () {
                   String userId = userIdController.text;
                   // Call unbanUser method when it's implemented
+                  if (userId.isNotEmpty) {
+                    //int id = int.parse(userId);
+                    banUnbancontroller.unbanUser(userId);
+                  }
                   Get.snackbar(
                     'User Unbanned',
                     'User $userId has been unbanned',

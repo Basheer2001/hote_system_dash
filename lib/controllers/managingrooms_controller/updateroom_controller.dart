@@ -11,12 +11,13 @@ class UpdateRoomController extends GetxController {
 
   void updateRoom({
     required int roomId,
-    required int floor,
+    required String floor,
     required String status,
     required int roomNumber,
     required int roomClassId,
     required double averageRating,
-    required String photo,
+    //required String photo,
+    required String view,
   }) async {
     isLoading.value = true;
 
@@ -27,7 +28,8 @@ class UpdateRoomController extends GetxController {
       roomNumber: roomNumber,
       roomClassId: roomClassId,
       averageRating: averageRating,
-      photo: photo,
+      //photo: photo,
+      view: view
     );
 
     isLoading.value = false;

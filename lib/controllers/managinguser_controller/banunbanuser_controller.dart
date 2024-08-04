@@ -11,15 +11,15 @@ class BanUnbanController extends GetxController {
   var loading = false.obs;
   var errorMessage = ''.obs;
 
-  void banUser(int userId) async {
+  void banUser(String userId) async {
     await _changeUserStatus(userId, 'ban');
   }
 
-  void unbanUser(int userId) async {
+  void unbanUser(String userId) async {
     await _changeUserStatus(userId, 'unban');
   }
 
-  Future<void> _changeUserStatus(int userId, String action) async {
+  Future<void> _changeUserStatus(String userId, String action) async {
     loading.value = true;
     AppResponse<Map<String, dynamic>> response = action == 'ban'
         ? await banUnbanRepo.banUser(userId)
