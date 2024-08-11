@@ -32,7 +32,7 @@ class SearchUserByNameRepo extends GetxService{
     );
 
     if (response.statusCode == 200 && response.data != null) {
-      List<Map<String, dynamic>> userList = List<Map<String, dynamic>>.from(response.data["data"]);
+      List<Map<String, dynamic>> userList = List<Map<String, dynamic>>.from(response.data);
       return AppResponse<List<Map<String, dynamic>>>(
         success: true,
         data: userList,

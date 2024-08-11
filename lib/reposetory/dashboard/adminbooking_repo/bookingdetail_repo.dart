@@ -1,33 +1,29 @@
 
 
+import 'package:dio/dio.dart'as dio;
 import 'package:get/get.dart';
 
+import '../../../contsant/sharedprefrences/shared.dart';
 import '../../../pages/dashboard_screens/manage_bookings/bookingclass.dart';
 import '../../../providers/apiprovider.dart';
 import '../../../service.dart';
 
 
-class BookingDetailsRepo extends GetxService {
-  final APIProvider apiProvider = Get.find<APIProvider>();
-  final MyServices myServices = Get.find<MyServices>();
+class AdminBookingRepo extends GetxService {
+  final APIProvider apiProvider = Get.find<APIProvider>(); // Assuming APIProvider setup correctly
 
   Future<Booking> getBookingDetails(int bookingId) async {
     try {
-      String? token = myServices.getToken();
-      if (token == null) {
-        throw Exception("User not logged in");
-      }
+      String? token = await getToken(); // Retrieve token
 
-      final response = await apiProvider.getRequest(
+      dio.Response response = await apiProvider.getRequest(
         "${APIProvider.url}dashboard/show/booking/Details/$bookingId",
-        {},
+        {}, // Add query parameters if required
         headers: {'Authorization': 'Bearer $token'},
       );
 
-      print("Response data: ${response.data}");
-
-      if (response.statusCode == 200) {
-        return Booking.fromJson(response.data['msg']['booking']);
+      if (response.statusCode == 200 && response.data['status']) {
+        return Booking.fromJson(response.data);
       } else {
         throw Exception('Failed to fetch booking details');
       }

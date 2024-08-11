@@ -22,7 +22,7 @@ class CreateBookingForCustomer extends StatelessWidget {
             children: [
               TextFormField(
                 controller: controller.roomIdTextController,
-                decoration: InputDecoration(labelText: 'Room ID'),
+                decoration: InputDecoration(labelText: 'Room ID',  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -33,7 +33,7 @@ class CreateBookingForCustomer extends StatelessWidget {
               ),
               TextFormField(
                 controller: controller.checkInDateTextController,
-                decoration: InputDecoration(labelText: 'Check-in Date'),
+                decoration: InputDecoration(labelText: 'Check-in Date',  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.datetime,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -44,7 +44,7 @@ class CreateBookingForCustomer extends StatelessWidget {
               ),
               TextFormField(
                 controller: controller.checkOutDateTextController,
-                decoration: InputDecoration(labelText: 'Check-out Date'),
+                decoration: InputDecoration(labelText: 'Check-out Date',  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.datetime,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -55,7 +55,7 @@ class CreateBookingForCustomer extends StatelessWidget {
               ),
               TextFormField(
                 controller: controller.numAdultsTextController,
-                decoration: InputDecoration(labelText: 'Number of Adults'),
+                decoration: InputDecoration(labelText: 'Number of Adults',  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -66,7 +66,7 @@ class CreateBookingForCustomer extends StatelessWidget {
               ),
               TextFormField(
                 controller: controller.numChildrenTextController,
-                decoration: InputDecoration(labelText: 'Number of Children'),
+                decoration: InputDecoration(labelText: 'Number of Children',  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -77,7 +77,7 @@ class CreateBookingForCustomer extends StatelessWidget {
               ),
               TextFormField(
                 controller: controller.paymentMethodTextController,
-                decoration: InputDecoration(labelText: 'Payment Method'),
+                decoration: InputDecoration(labelText: 'Payment Method',  border: OutlineInputBorder(),),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter Payment Method';
@@ -93,6 +93,18 @@ class CreateBookingForCustomer extends StatelessWidget {
                   return ElevatedButton(
                     onPressed: controller.createBooking,
                     child: Text('Create Booking'),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                      foregroundColor: MaterialStateProperty.all<Color>(Colors.blueAccent),
+                      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 20), // Adjust padding as needed
+                      ),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
                   );
                 }
               }),

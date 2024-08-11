@@ -1,4 +1,8 @@
 import 'package:dashboardhs/providers/apiprovider.dart';
+import 'package:dashboardhs/reposetory/dashboard/adminbooking_repo/bookingdetail_repo.dart';
+import 'package:dashboardhs/reposetory/dashboard/adminbooking_repo/createbookingforadmin_repo.dart';
+import 'package:dashboardhs/reposetory/dashboard/adminbooking_repo/createbookingforcustomer_repo.dart';
+import 'package:dashboardhs/reposetory/dashboard/adminbooking_repo/deletebooking_repo.dart';
 import 'package:dashboardhs/reposetory/dashboard/adminbooking_repo/searchbookings_repo.dart';
 import 'package:dashboardhs/reposetory/dashboard/adminbooking_repo/showallbookings_repo.dart';
 import 'package:dashboardhs/reposetory/dashboard/adminprofile_repo/adminprofilerepo.dart';
@@ -19,6 +23,7 @@ import 'package:dashboardhs/reposetory/dashboard/adminuser_repo/viewallusers_rep
 import 'package:dashboardhs/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'controllers/manage_bookings/searchbookings_controller.dart';
 import 'controllers/managingrooms_controller/roomsearch_controller.dart';
 import 'controllers/managinguser_controller/banunbanuser_controller.dart';
 import 'service.dart';
@@ -48,9 +53,12 @@ class AppBinding extends Bindings{
     Get.lazyPut(()=>CheckMultipleReportsRepo());
     Get.lazyPut(()=>ShowAllBookingsRepo());
     Get.lazyPut(()=> SearchBookingsRepo());
-    Get.lazyPut(()=>  RoomSearchController());
-
-
+    Get.lazyPut(()=>  RoomSearchController(),fenix: true);
+    Get.lazyPut(()=>  BookingSearchController());
+    Get.lazyPut(()=>CreateBookingForAdminRepo());
+    Get.lazyPut(()=>CreateBookingForCustomerRepo());
+    Get.lazyPut(()=>AdminBookingRepo());
+    Get.lazyPut(()=>DeleteBookingRepo());
     Get.lazyPut(() => MyServices().init()); // Ensure this is the correct class
   }}
 

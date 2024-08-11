@@ -34,7 +34,7 @@ class CreateBookingForCustomerRepo extends GetxService {
       if (response.statusCode == 200) {
         return AppResponse<String>(
           success: true,
-          data: response.data["data"],
+          data: response.data,
         );
       } else {
         return AppResponse<String>(

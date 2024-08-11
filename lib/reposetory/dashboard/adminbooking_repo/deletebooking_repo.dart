@@ -1,34 +1,35 @@
+import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
 import 'package:dio/dio.dart';
+import '../../../models/appresponse.dart';
 import '../../../providers/apiprovider.dart';
 import '../../../service.dart';
 
 
 class DeleteBookingRepo extends GetxService {
   final APIProvider apiProvider = Get.find<APIProvider>();
-  final MyServices myServices = Get.find<MyServices>();
 
-
-
-  Future<void> deleteBooking(int bookingId) async {
+  Future<AppResponse<void>> deleteBooking(String userId) async {
     try {
-      String? token = myServices.getToken();
-      if (token == null) {
-        throw Exception("User not logged in");
-      }
+      dio.Response response = await apiProvider.deleteRequest(
+        "${APIProvider.url}dashboard/destroy/bookings/$userId",
 
-      final response = await apiProvider.deleteRequest(
-        "${APIProvider.url}dashboard/destroy/bookings/$bookingId",
-        headers: {'Authorization': 'Bearer $token'},
+        headers: {
+          // Add headers if needed
+        },
       );
 
-      print("Response status code: ${response.statusCode}");
-      if (response.statusCode != 200) {
-        throw Exception('Failed to delete booking');
+      if (response.statusCode == 200) {
+        return AppResponse(success: true);
+      } else if (response.statusCode == 400) {
+        throw Exception(response.data['error']);
+      } else if (response.statusCode == 500) {
+        throw Exception('Server error');
+      } else {
+        throw Exception('Unknown error');
       }
     } catch (e) {
-      print("Error deleting booking: $e");
-      throw e;
+      throw Exception('Error: $e');
     }
   }
 }

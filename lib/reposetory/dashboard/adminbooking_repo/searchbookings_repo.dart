@@ -7,56 +7,27 @@ import '../../../providers/apiprovider.dart';
 
 class SearchBookingsRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>();
-  Future<AppResponse<List<Booking>>> searchBookings(
-      String user_id,
-      String room_id,
-      String check_in_date,
-      String check_out_date,
-      String payment_status,
-      String payment_method,
-      ) async {
-    print("\n1");
 
+  Future<AppResponse<List<Booking>>> searchBookings(String roomId) async {
     try {
       dio.Response response = await apiProvider.postRequest(
         "${APIProvider.url}dashboard/search/bookings",
         {},
-        jsonEncode({
-          "user_id": user_id,
-          "room_id": room_id,
-          "check_in_date":check_in_date,
-          "check_out_date":check_out_date,
-          "payment_status":payment_status,
-          "payment_method":payment_method,
-        }),
+        jsonEncode({"room_id": "2"}),
       );
-      print("\n2");
-      APIProvider.cookies = response.headers['set-cookie'];
 
-      print("Response status code: ${response.statusCode}");
-      print("Response body: ${response.data}");
-
-      print("Response cookies: ${ APIProvider.cookies}");
-      print("Response header: ${response.headers}");
-      print("Response header: ${response}");
-      // cookie = response.headers['set-cookie'];
-
-      if (response.statusCode == 200) {
-        List<dynamic> roomsJson = response.data['data'];
-        List<Booking> book = roomsJson.map((json) => Booking.fromJson(json))
-            .toList();
-        return AppResponse<List<Booking>>(success: true, data: book);
+      if (response.statusCode == 200 && response.data != null) {
+        List<dynamic> bookingsJson = response.data;
+        List<Booking> bookings = bookingsJson.map((json) => Booking.fromJson(json)).toList();
+        return AppResponse<List<Booking>>(success: true, data: bookings);
       } else {
-        throw Exception(
-            "Server responded with status code ${response.statusCode}");
+        return AppResponse<List<Booking>>(
+          success: false,
+          errorMessage: response.data["msg"] ?? "Error searching bookings",
+        );
       }
     } catch (e) {
-      print("Error during login: $e");
       return AppResponse(success: false, errorMessage: e.toString());
     }
   }
-
-
-
-
 }

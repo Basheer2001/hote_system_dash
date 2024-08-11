@@ -54,7 +54,7 @@ class CDRoomRepo extends GetxService {
       print("Response body: ${response.data}");
 
       if (response.statusCode == 200 && response.data['status'] == true) {
-        Room room = Room.fromJson(response.data['data']);
+        Room room = Room.fromJson(response.data);
         return AppResponse<Room>(success: true, data: room);
       } else {
         throw Exception("Failed to create room: ${response.data['msg']}");

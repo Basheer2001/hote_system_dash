@@ -1,15 +1,15 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../models/appresponse.dart';
-import '../../reposetory/dashboard/adminbooking_repo/createbookingforadmin_repo.dart';
-
+import '../../reposetory/dashboard/adminbooking_repo/bookingforcustomer_repo.dart';
 //
-class CreateBookingController extends GetxController {
-  final CreateBookingForAdminRepo bookingRepo = Get.find<CreateBookingForAdminRepo>();
+class BookingForCustomerController extends GetxController {
+  final BookingForCustomerRepo bookingRepo = Get.find<BookingForCustomerRepo>();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController roomIdController = TextEditingController();
+  TextEditingController userIdController = TextEditingController();
   TextEditingController checkInDateController = TextEditingController();
   TextEditingController checkOutDateController = TextEditingController();
   TextEditingController numAdultsController = TextEditingController();
@@ -23,11 +23,12 @@ class CreateBookingController extends GetxController {
       bookingLoadingState.value = true;
 
       AppResponse<Map<String, dynamic>> response = await bookingRepo.createBooking(
-        roomId: roomIdController.text,
+        roomId: int.parse(roomIdController.text),
+        userId: int.parse(userIdController.text),
         checkInDate: checkInDateController.text,
         checkOutDate: checkOutDateController.text,
-        numAdults: numAdultsController.text,
-        numChildren: numChildrenController.text,
+        numAdults: int.parse(numAdultsController.text),
+        numChildren: int.parse(numChildrenController.text),
         paymentMethod: paymentMethodController.text,
       );
 

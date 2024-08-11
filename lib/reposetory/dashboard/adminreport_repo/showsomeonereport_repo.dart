@@ -21,7 +21,7 @@ class ShowSomeonereportRepo extends GetxService {
       );
 
       if (response.statusCode == 200 && response.data != null) {
-        List<Map<String, dynamic>> reportsList = List<Map<String, dynamic>>.from(response.data["data"]);
+        List<Map<String, dynamic>> reportsList = List<Map<String, dynamic>>.from(response.data);
         return AppResponse<List<Map<String, dynamic>>>(
           success: true,
           data: reportsList,

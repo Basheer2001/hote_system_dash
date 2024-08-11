@@ -4,15 +4,14 @@ import 'package:get/get.dart';
 import '../service.dart';
 class APIProvider extends GetxService{
   ////
-  //static String url = "http://192.168.1.110:8000/api/";
+  static String url = "http://192.168.1.110:8000/api/";
   static String? token;
-  static String url = "http://127.0.0.1:8000/api/";
- // static String url = "http://192.168.1.4:8000/api/";
+  //static String url = "http://127.0.0.1:8000/api/";
+  //static String url = "http://192.168.1.4:8000/api/";
 
 
 
   late dio.Dio _dio;
-  static List<String>? cookies;
 
 
 
@@ -21,15 +20,15 @@ class APIProvider extends GetxService{
   APIProvider(){
     _dio=dio.Dio(
       dio.BaseOptions(
-          headers: {
-            'Cookie': cookies??cookies,
-            //'Authorization' : token?? 'Bearer ${token}',
-            //'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjNlMGU3ZDA4NDY2MzcxNDE1NDc5OTVlZDVlZjJiYjMwMTRlMGI4OWFmNThhZTA3NTRkMmFiYzEzYzQwMjgzZDcxMDRkODVlN2YxYTM2ZjUiLCJpYXQiOjE3MjI0NDc3ODUuMjcyMTU4LCJuYmYiOjE3MjI0NDc3ODUuMjcyMTY1LCJleHAiOjE3NTM5ODM3ODQuODMyMjIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.JORNyQUX_C9RxZClziMVTTBpbliJDLKh_bIsPwLQqdAnz0NxmFay4eWdnQkhoO-Dm0oJHmGJ350K_uGrD8kb5FQq7Iwsf9XNs1oPiuhUzciicuTW6WoDU-h55mD6zIxn1u-kQKsUWckTH_PzOVyZy70LiZnkG4b8flQpeHInWrrB-E0QPK_8LRSlY_Q-r-O7tNfcPVBmmk-GgItlSzsFEi42vSfnfWmfgrI_2pCXllQmqJmGb6jWzV5jCbG4s9Wu4733IuGbrfLW3pT5TEQoUgjaPKa0NgY1XfTDSgimm5c-6VVNr06HuYDsKC0j-fUG_IU89uN4SjY-63WRwPXkEzzugXVph4-XLjLAlKMuNvg9gLDAgVqvMvJEVMeayYT7SLPk9sozQnbbWP4yE9ykoguIurvJZb9hXM-qgxHN1EapgU9MnGacSDzl3vIY5FZsEaC0bhL_adiuqS6T3WpvOOFZ2dABXIkJphxBDwBKVV9TLpK502I_NfUdluJhSSvgOXTpVrg3h9LfEXaHl5WGPaPXG4OpvkB6EvLTlnIm_W2_3svmeTXdB6Fsn0y9vI5gO3G7KUoiCDZelmXWo0du_BQU2brT5__MwOh1OjCUGtoyIkLyRr126Fzm4wSbvOXh0BW8R18j-4ZzTnznV1kWism-WImB-VF-NKfzBUTbwoo',
-            'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzM3NzUzZjcwZGIyM2E1NzIyOTAxNzVhZjBkODE1MzA1NjVjM2YzY2I5YzUzMmE3NzMxZWRiOTA0MTNjN2M2YTRhOGM5YzY0YWEwODg0ZDQiLCJpYXQiOjE3MjI3ODU4OTMuNTA1MTE2LCJuYmYiOjE3MjI3ODU4OTMuNTA1MTI1LCJleHAiOjE3NTQzMjE4OTIuMTQwODgsInN1YiI6IjMiLCJzY29wZXMiOltdfQ.jlOX8UmlrfKlLUjlUXxV3FOOGfjKRIbtmCaHj2ZJTuMEbqMvZEMWpTR-xmjnYd5MI6voqwRosdraih49wEZaN0cRtplhDfP9ykmseeNIonFESK7mLEgXC_Hma9sOtSSnjG1zUDgwOBX2cszgk0G5v7CZ9tdy03bFpP0UhJU3TP4OlcHssfj-iFcNN1vu5BvjiRDuUe4gxovzOzZlrMTtlwlZQu5qMvrfI3szx-QqzIBD48QgZU-xBEnB46ZTYfiMHJyMg8Ps3P7wn_IjIDQSlVOxWiHhL4bLh3XpdLhLnoXSYGrVbmCgW1B7hCIjWkr3lxubb0hXiubwrWifxEGlMC1ADFpNvr4GEAxDkS_vb0aJCPGJ3SrcKa72Bxg2Fn0IbubdsS3pnGM9WfrmPtrPamXZrBeM_7hZqli3qWIGEbjPFvjZ5qyP-aT7bPBvo1dG8_H2CJNSSDrFDFB_tAkgYG9PhUVLvA7YM3FbXLYR3NYytDvYl0BNA4RtFXCqAYP0iMzLVJp8OWSeCvoEudWkjrw1bX2Qnr40wl3zQjhCCaI5snNisS-TSK56UGEdZIES56VMqKcMPN1LzSn4BUgYOnndhAvdsjlodxhswDWnC0w69MuvmV5uRh7JuRHElvCYo-YH1f3f7qxIYhQTa0SjCPd1bCRpweEn8ep_cmqyU8c'
-      ,
-            'Accept':"application/json",
-            'Content-Type':"application/json",
-          },
+      //     headers: {
+      //       //'Cookie': cookies??cookies,
+      //       //'Authorization' : token?? 'Bearer ${token}',
+      //       //'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYjNlMGU3ZDA4NDY2MzcxNDE1NDc5OTVlZDVlZjJiYjMwMTRlMGI4OWFmNThhZTA3NTRkMmFiYzEzYzQwMjgzZDcxMDRkODVlN2YxYTM2ZjUiLCJpYXQiOjE3MjI0NDc3ODUuMjcyMTU4LCJuYmYiOjE3MjI0NDc3ODUuMjcyMTY1LCJleHAiOjE3NTM5ODM3ODQuODMyMjIxLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.JORNyQUX_C9RxZClziMVTTBpbliJDLKh_bIsPwLQqdAnz0NxmFay4eWdnQkhoO-Dm0oJHmGJ350K_uGrD8kb5FQq7Iwsf9XNs1oPiuhUzciicuTW6WoDU-h55mD6zIxn1u-kQKsUWckTH_PzOVyZy70LiZnkG4b8flQpeHInWrrB-E0QPK_8LRSlY_Q-r-O7tNfcPVBmmk-GgItlSzsFEi42vSfnfWmfgrI_2pCXllQmqJmGb6jWzV5jCbG4s9Wu4733IuGbrfLW3pT5TEQoUgjaPKa0NgY1XfTDSgimm5c-6VVNr06HuYDsKC0j-fUG_IU89uN4SjY-63WRwPXkEzzugXVph4-XLjLAlKMuNvg9gLDAgVqvMvJEVMeayYT7SLPk9sozQnbbWP4yE9ykoguIurvJZb9hXM-qgxHN1EapgU9MnGacSDzl3vIY5FZsEaC0bhL_adiuqS6T3WpvOOFZ2dABXIkJphxBDwBKVV9TLpK502I_NfUdluJhSSvgOXTpVrg3h9LfEXaHl5WGPaPXG4OpvkB6EvLTlnIm_W2_3svmeTXdB6Fsn0y9vI5gO3G7KUoiCDZelmXWo0du_BQU2brT5__MwOh1OjCUGtoyIkLyRr126Fzm4wSbvOXh0BW8R18j-4ZzTnznV1kWism-WImB-VF-NKfzBUTbwoo',
+      //       'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYzM3NzUzZjcwZGIyM2E1NzIyOTAxNzVhZjBkODE1MzA1NjVjM2YzY2I5YzUzMmE3NzMxZWRiOTA0MTNjN2M2YTRhOGM5YzY0YWEwODg0ZDQiLCJpYXQiOjE3MjI3ODU4OTMuNTA1MTE2LCJuYmYiOjE3MjI3ODU4OTMuNTA1MTI1LCJleHAiOjE3NTQzMjE4OTIuMTQwODgsInN1YiI6IjMiLCJzY29wZXMiOltdfQ.jlOX8UmlrfKlLUjlUXxV3FOOGfjKRIbtmCaHj2ZJTuMEbqMvZEMWpTR-xmjnYd5MI6voqwRosdraih49wEZaN0cRtplhDfP9ykmseeNIonFESK7mLEgXC_Hma9sOtSSnjG1zUDgwOBX2cszgk0G5v7CZ9tdy03bFpP0UhJU3TP4OlcHssfj-iFcNN1vu5BvjiRDuUe4gxovzOzZlrMTtlwlZQu5qMvrfI3szx-QqzIBD48QgZU-xBEnB46ZTYfiMHJyMg8Ps3P7wn_IjIDQSlVOxWiHhL4bLh3XpdLhLnoXSYGrVbmCgW1B7hCIjWkr3lxubb0hXiubwrWifxEGlMC1ADFpNvr4GEAxDkS_vb0aJCPGJ3SrcKa72Bxg2Fn0IbubdsS3pnGM9WfrmPtrPamXZrBeM_7hZqli3qWIGEbjPFvjZ5qyP-aT7bPBvo1dG8_H2CJNSSDrFDFB_tAkgYG9PhUVLvA7YM3FbXLYR3NYytDvYl0BNA4RtFXCqAYP0iMzLVJp8OWSeCvoEudWkjrw1bX2Qnr40wl3zQjhCCaI5snNisS-TSK56UGEdZIES56VMqKcMPN1LzSn4BUgYOnndhAvdsjlodxhswDWnC0w69MuvmV5uRh7JuRHElvCYo-YH1f3f7qxIYhQTa0SjCPd1bCRpweEn8ep_cmqyU8c'
+      // ,
+      //       'Accept':"application/json",
+      //       'Content-Type':"application/json",
+      //     },
         //  baseUrl: "https://reqres.in/api/",
         //  connectTimeout: Duration(seconds: 30),
         // 10 minutes in milliseconds
@@ -46,7 +45,7 @@ class APIProvider extends GetxService{
 
   Future<dio.Response> postRequest(
 
-      String method, Map<String,dynamic> queryParams,dynamic body,{String? cookies,String?token})async{
+      String method, Map<String,dynamic> queryParams,dynamic body,{String?token})async{
     // print(1);
     // DioForBrowser dioForBrowser = DioForBrowser(_dio.options);
     // print(2);
@@ -68,7 +67,17 @@ class APIProvider extends GetxService{
     //   );
     // }
     print(6);
-    dio.Response response=await _dio.post(method,queryParameters: queryParams,data: body);
+    dio.Response response=await _dio.post(
+        method,
+        queryParameters: queryParams,
+        data: body,
+      options: dio.Options(
+          headers: {
+            'Authorization' : token==null?null:'Bearer $token',
+
+          }),
+    );
+    print(response);
     print(7);
     print(response);
     print(response.statusCode);

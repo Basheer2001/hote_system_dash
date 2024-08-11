@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../../contsant/routes.dart';
 import 'Admin_profile/admin_profile.dart';
+import 'manage_bookings/optionbookingscreen.dart';
 import 'managing_report/checkmultipereports.dart';
 import 'managing_report/showactivereport.dart';
 import 'managing_report/showsomeonereport.dart';
@@ -43,6 +44,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         break;
       case 5:
         Get.to(()=>OptionUserScreen());
+        break;
+      case 6:
+        Get.to(()=>OptionBookingScreen());
         break;
       default:
         break;
@@ -87,6 +91,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   NavigationRailDestination(
                     icon: Icon(Icons.supervised_user_circle_outlined),
                     label: Text("Users"),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.book),
+                    label: Text("Bookings"),
                   ),
                 ],
                 selectedIndex: _selectedIndex,

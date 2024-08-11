@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/manage_bookings/bookingdetails_controller.dart';
+import '../../../controllers/manage_bookings/updatebookingstatue.dart';
 
 class UpdateBookingStatue extends StatelessWidget {
   const UpdateBookingStatue({super.key});

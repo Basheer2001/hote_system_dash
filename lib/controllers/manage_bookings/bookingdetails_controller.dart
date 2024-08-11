@@ -4,20 +4,18 @@ import 'package:get/get.dart';
 import '../../pages/dashboard_screens/manage_bookings/bookingclass.dart';
 import '../../reposetory/dashboard/adminbooking_repo/bookingdetail_repo.dart';
 
-
-class BookingDetailsController extends GetxController {
-  final BookingDetailsRepo bookingDetailsRepo = Get.find<BookingDetailsRepo>();
-
+//
+class AdminBookingController extends GetxController {
+  final AdminBookingRepo bookingRepo = Get.find<AdminBookingRepo>();
 
   var isLoading = false.obs;
-  var bookingDetails = Rxn<Booking>();
+  var bookingDetail = Rxn<Booking>();
 
   Future<void> fetchBookingDetails(int bookingId) async {
     try {
       isLoading.value = true;
-      Booking booking = await bookingDetailsRepo.getBookingDetails(bookingId);
-      print("Fetched booking details: $booking");
-      bookingDetails.value = booking;
+      Booking fetchedBookingDetail = await bookingRepo.getBookingDetails(bookingId);
+      bookingDetail.value = fetchedBookingDetail;
     } catch (e) {
       print("Error fetching booking details: $e");
     } finally {

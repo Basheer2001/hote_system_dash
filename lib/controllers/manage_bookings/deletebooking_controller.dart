@@ -1,29 +1,58 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../pages/dashboard_screens/manage_bookings/bookingclass.dart';
 import '../../reposetory/dashboard/adminbooking_repo/deletebooking_repo.dart';
-
+//
 
 class DeleteBookingController extends GetxController {
-  final DeleteBookingRepo bookingRepo = Get.find<DeleteBookingRepo>();
+  final DeleteBookingRepo deletebookingRepo = Get.find<DeleteBookingRepo>();
+  final TextEditingController userIdController = TextEditingController();
 
-  var isLoading = false.obs;
-  var bookings = <Booking>[].obs;
+  var deletionLoading = false.obs;
 
-  @override
-  void onInit() {
-    super.onInit();
+  void deleteBooking() async {
+    try {
+      deletionLoading.value = true;
+      String userId = userIdController.text.trim();
+
+      // Call the repo method to delete the user
+      await deletebookingRepo.deleteBooking(userId);
+
+      // Show success dialog upon successful deletion
+      Get.defaultDialog(
+        title: "Success",
+        content: Text("User deleted successfully"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    } catch (e) {
+      // Show error dialog if deletion fails
+      Get.defaultDialog(
+        title: "Error",
+        content: Text("Failed to delete user: $e"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    } finally {
+      deletionLoading.value = false;
+    }
   }
 
-
-  Future<void> deleteBooking(int bookingId) async {
-    try {
-      isLoading.value = true;
-      await bookingRepo.deleteBooking(bookingId);
-      bookings.removeWhere((booking) => booking.id == bookingId.toString());
-    } catch (e) {
-      print("Error deleting booking: $e");
-    } finally {
-      isLoading.value = false;
-    }
+  @override
+  void dispose() {
+    userIdController.dispose();
+    super.dispose();
   }
 }

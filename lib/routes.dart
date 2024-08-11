@@ -6,7 +6,7 @@ import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/createbookin
 import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/createbookingforcustomer.dart';
 import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/deletebookingclass.dart';
 import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/search_bookings.dart';
-import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/showallbookings.dart';
+import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/showallbookings/showallbookings.dart';
 import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/updatebookingstatue.dart';
 import 'package:dashboardhs/pages/dashboard_screens/managing_report/showsomeonereport.dart';
 import 'package:dashboardhs/pages/dashboard_screens/managing_rooms/adminallrooms.dart';
@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import 'contsant/routes.dart';
 List<GetPage<dynamic>>? routes =[
   GetPage(name: AppRoute.dashboardscreen, page: () => DashboardScreen()),
+  GetPage(name:"/", page: () => LoginAdmin()),
   GetPage(name:AppRoute.loginadmin, page: () => LoginAdmin()),
   GetPage(name:AppRoute.profileadmin, page: () => AdminProfile()),
   GetPage(name:AppRoute.adminallrooms, page: () => AdminAllRooms()),
@@ -23,10 +24,10 @@ List<GetPage<dynamic>>? routes =[
   GetPage(name:AppRoute.showsomeonereportscreen, page: () => ShowSomeonereportScreen(userId: 3,)),
   GetPage(name:AppRoute.showallbookingsscreen, page: () => ShowAllBookingsScreen()),
   GetPage(name:AppRoute.bookingSearch, page: () =>BookingSearch()),
-  GetPage(name:AppRoute.deleteBookingsScreen, page: () => DeleteBookingsScreen()),
-  GetPage(name:AppRoute.bookingDetailsScreen, page: () =>BookingDetailsScreen(bookingId: 2,)),
+  GetPage(name:AppRoute.deleteBookingsScreen, page: () => DeleteBookingScreen()),
+ // GetPage(name:AppRoute.bookingDetailsScreen, page: () =>BookingDetailsScreen(bookingId: 2,)),
   GetPage(name:AppRoute.updatebookingstatue, page: () =>UpdateBookingStatue()),
-  GetPage(name:AppRoute.createbookingforadmin, page: () =>CreateBookingForAdmin()),
+//  GetPage(name:AppRoute.createbookingforadmin, page: () =>CreateBookingPage()),
   GetPage(name:AppRoute.createbookingforcustomer, page: () =>CreateBookingForCustomer()),
 
 
