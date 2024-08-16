@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:flutter/material.dart';
 
 import '../../../models/appresponse.dart';
 import '../../../providers/apiprovider.dart';
@@ -13,14 +12,16 @@ class CheckMultipleReportsRepo extends GetxService {
   MyServices myServices = Get.find<MyServices>();
   APIProvider apiProvider = Get.find<APIProvider>();
 
-  Future<AppResponse<String>> updateReports(List<int> reportIds) async {
+  //Future<AppResponse<String>> updateReports(List<int> reportIds) async {
+  Future<AppResponse<String>> updateReports(String reportIds) async {
     try {
       dio.Response response = await apiProvider.postRequest(
         "${APIProvider.url}dashboard/reports/check",
         {},
-        jsonEncode({
-          "reports": reportIds,
-        }),
+        {
+        //  "reports": reportIds,
+          "reports[]": reportIds,
+        },
       );
 
       print("Response status code: ${response.statusCode}");

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../models/appresponse.dart';
 import '../../reposetory/dashboard/adminbooking_repo/createbookingforadmin_repo.dart';
 
-//
+
 class CreateBookingController extends GetxController {
   final CreateBookingForAdminRepo bookingRepo = Get.find<CreateBookingForAdminRepo>();
 

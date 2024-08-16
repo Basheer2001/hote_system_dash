@@ -20,7 +20,7 @@ class OptionUserScreen extends StatelessWidget {
     BanUnbanUser(),
     ViewAllUsers(),
     SearchUserByName(),
-    GetUserProfileScreen(userId: 4),
+    GetUserProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

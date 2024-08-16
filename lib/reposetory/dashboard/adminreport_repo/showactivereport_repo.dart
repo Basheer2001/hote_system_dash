@@ -26,6 +26,7 @@ class ReportRepo extends GetxService {
       print("Response data: ${response.data}");
 
       if (response.statusCode == 200) {
+        print(response);
         List<dynamic> reportsJson = response.data['msg']['reports'];
         return reportsJson.map((json) => Report.fromJson(json)).toList();
       } else {

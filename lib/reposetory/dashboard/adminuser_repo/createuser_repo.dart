@@ -47,9 +47,11 @@ class CreateUserRepo extends GetxService {
         "${APIProvider.url}dashboard/create/user",
         {},
         formData,
+        cookies: APIProvider.cookies?.first,
       );
 
       // Update cookies if received in response
+      APIProvider.cookies = response.headers['set-cookie'];
 
       String token = response.data["data"];
       myServices.sharedPreferences.setString("token", token);
@@ -58,6 +60,7 @@ class CreateUserRepo extends GetxService {
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");
       print("Response token: $token");
+      print("Response cookies: ${APIProvider.cookies}");
 
       if (response.statusCode == 200) {
         return AppResponse<Map<String, dynamic>>(success: true);

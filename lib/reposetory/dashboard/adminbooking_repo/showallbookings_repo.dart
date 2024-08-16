@@ -24,15 +24,8 @@ class ShowAllBookingsRepo extends GetxService {
       print("Response data: ${response.data}");
 
       if (response.statusCode == 200) {
-       // List<dynamic> bookingsJson = response.data['msg']['bookings'];
-        print('asdfggggggggggggggggggggg');
         List<dynamic> bookingsJson = response.data['data'];
-        print('asdfggggggggggggggggggggg');
-
         print("Bookings JSON: $bookingsJson"); // Debug print
-        print('asdfggggggggggggggggggggg');
-        print('asdfaaaaaaaaaaaaaaaaaaaa');
-
         return bookingsJson.map((json) => Booking.fromJson(json)).toList();
       } else {
         throw Exception('Failed to fetch bookings');

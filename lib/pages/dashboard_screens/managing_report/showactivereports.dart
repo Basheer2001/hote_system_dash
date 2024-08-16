@@ -1,10 +1,12 @@
 import 'package:dashboardhs/pages/dashboard_screens/managing_report/reportclass.dart';
+import 'package:dashboardhs/pages/dashboard_screens/managing_report/showsomeonereport.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/managingreports_controller/showactivereport_controller.dart';
+import 'checkmultipereports.dart';
 
 
-class Reports extends StatelessWidget {
+class ShowActiveReports extends StatelessWidget {
   final ReportController reportsController = Get.put(ReportController());
 
   @override
@@ -15,11 +17,6 @@ class Reports extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Reports'),
-        actions: [
-          ElevatedButton(onPressed: (){
-          //  Get.to(() =>CreateReport());
-          }, child: Text("Create Report")),
-        ],
       ),
       body: Center(
         child: Obx(() {
@@ -34,7 +31,7 @@ class Reports extends StatelessWidget {
                 Report report = reportsController.reports[index] as Report;
                 return ListTile(
                   title: Text(report.title),
-                   subtitle: Text(report.description), // Uncomment if needed
+                  subtitle: Text(report.description), // Uncomment if needed
                 );
               },
             );

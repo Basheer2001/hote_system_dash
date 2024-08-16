@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import '../../pages/dashboard_screens/manage_bookings/showallbookings/showallbookingsclass.dart';
 import '../../reposetory/dashboard/adminbooking_repo/showallbookings_repo.dart';
-//
+
 class ShowAllBookingsController extends GetxController {
   final ShowAllBookingsRepo bookingRepo = Get.find<ShowAllBookingsRepo>();
 

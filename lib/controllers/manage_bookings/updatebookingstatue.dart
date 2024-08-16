@@ -6,25 +6,24 @@ import 'package:get/get.dart';
 
 import '../../models/appresponse.dart';
 import '../../reposetory/dashboard/adminbooking_repo/updatepaymentstatue_repo.dart';
-//
-class BookingDetailsController extends GetxController {
-  final UpdateBookingStatueRepo updateBookingStatueRepo = Get.find<UpdateBookingStatueRepo>();
-  GlobalKey<FormState> formKey=GlobalKey<FormState>();
 
+class PaymentStatusController extends GetxController {
+  PaymentStatusRepo paymentStatusRepo = Get.find<PaymentStatusRepo>();
 
+  var responseMessage = ''.obs;
   var loading = false.obs;
   var errorMessage = ''.obs;
 
-
-  Future<void> updatePaymentStatus(int bookingId, String status) async {
+  Future<void> updatePaymentStatus(String bookingId, String paymentStatus) async {
     loading.value = true;
-    AppResponse<void> response = await updateBookingStatueRepo.updatePaymentStatus(bookingId, status);
+    AppResponse<Map<String, dynamic>> response = await paymentStatusRepo.updatePaymentStatus(bookingId, paymentStatus);
     loading.value = false;
 
     if (response.success) {
+      responseMessage.value = response.data!["msg"] ?? "Payment status updated successfully.";
       Get.defaultDialog(
         title: "Success",
-        content: Text("Payment status updated successfully"),
+        content: Text(responseMessage.value),
         actions: [
           TextButton(
             onPressed: () {
@@ -38,7 +37,7 @@ class BookingDetailsController extends GetxController {
       errorMessage.value = response.errorMessage!;
       Get.defaultDialog(
         title: "Error",
-        content: Text(response.errorMessage!),
+        content: Text(errorMessage.value),
         actions: [
           TextButton(
             onPressed: () {
@@ -50,6 +49,4 @@ class BookingDetailsController extends GetxController {
       );
     }
   }
-
-
 }

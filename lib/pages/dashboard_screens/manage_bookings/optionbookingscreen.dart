@@ -1,15 +1,19 @@
 
 
-import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/search_bookings.dart';
+import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/searchbooking/search_bookings.dart';
 import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/showallbookings/showallbookings.dart';
+import 'package:dashboardhs/pages/dashboard_screens/manage_bookings/updatebookingstatue.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'bookingdetailsscreen.dart';
+import '../../../reposetory/dashboard/adminbooking_repo/downloadinvocierepo.dart';
+import '../managing_services/indexservice.dart';
+import 'bookingdetail/bookingdetailsscreen.dart';
 
 import 'createbookingforadmin.dart';
 import 'createbookingforcustomer.dart';
 import 'deletebookingclass.dart';
+import 'downloadpdf.dart';
 
 class OptionBookingScreen extends StatelessWidget {
   OptionBookingScreen({Key? key}) : super(key: key);
@@ -19,11 +23,12 @@ class OptionBookingScreen extends StatelessWidget {
   final List<Widget> _widgetOptions = [
     ShowAllBookingsScreen(),
     BookingSearch(),
-   // CustomerBookingPage(),
     CreateBookingForAdmin(),
     CreateBookingForCustomer(),
-    AdminBookingDetails(),
+    ShowBookingDetailsScreen(),
     DeleteBookingScreen(),
+    InvoiceScreen(),
+    UpdatePaymentStatusPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -92,12 +97,12 @@ class OptionBookingScreen extends StatelessWidget {
                   NavigationRailDestination(
                     icon: Icon(Icons.book_online), // Icon for CreateRoomAdmin
                     selectedIcon: Icon(Icons.book_online),
-                    label: Text('Booking For User'), // Label for CreateRoomAdmin
+                    label: Text('Booking For Admin'), // Label for CreateRoomAdmin
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.book_online), // Icon for CreateRoomAdmin
                     selectedIcon: Icon(Icons.book_online),
-                    label: Text('Booking For Admin'), // Label for CreateRoomAdmin
+                    label: Text('Booking For User'), // Label for CreateRoomAdmin
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.details), // Icon for CreateRoomAdmin
@@ -108,6 +113,16 @@ class OptionBookingScreen extends StatelessWidget {
                     icon: Icon(Icons.delete), // Icon for CreateRoomAdmin
                     selectedIcon: Icon(Icons.delete),
                     label: Text('Delete'), // Label for CreateRoomAdmin
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.download), // Icon for CreateRoomAdmin
+                    selectedIcon: Icon(Icons.download),
+                    label: Text('download'), // Label for CreateRoomAdmin
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.update), // Icon for CreateRoomAdmin
+                    selectedIcon: Icon(Icons.update),
+                    label: Text('update'), // Label for CreateRoomAdmin
                   ),
                 ],
               );

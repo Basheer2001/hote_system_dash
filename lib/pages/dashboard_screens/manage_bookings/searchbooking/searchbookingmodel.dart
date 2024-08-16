@@ -6,7 +6,7 @@ class Booking {
   final String checkOutDate;
   final int numAdults;
   final int numChildren;
-  final String paymentSessionId;
+  final String? paymentSessionId;
   final String paymentStatus;
   final String paymentMethod;
   final String createdAt;
@@ -20,7 +20,7 @@ class Booking {
     required this.checkOutDate,
     required this.numAdults,
     required this.numChildren,
-    required this.paymentSessionId,
+    this.paymentSessionId,
     required this.paymentStatus,
     required this.paymentMethod,
     required this.createdAt,
@@ -44,3 +44,24 @@ class Booking {
     );
   }
 }
+
+/*
+  factory Booking.fromJson(Map<String, dynamic> json) {
+    return Booking(
+      id: json['id'],
+      userId: json['user_id'],
+      roomId: json['room_id'],
+      checkInDate: json['check_in_date'],
+      checkOutDate: json['check_out_date'],
+      numAdults: json['num_adults'],
+      numChildren: json['num_children'],
+      paymentSessionId: json['payment_session_id']!= null ? json['payment_session_id'] : null,
+      paymentStatus: json['payment_status'],
+      paymentMethod: json['payment_method'],
+      createdAt: json['created_at'],
+      updatedAt: json['updated_at'],
+    );
+  }
+*/
+
+

@@ -25,6 +25,7 @@ class LoginAdminRepo extends GetxService{
 
       String token = response.data["data"];
       myServices.sharedPreferences.setString("token", token);
+      APIProvider.token=token;
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");

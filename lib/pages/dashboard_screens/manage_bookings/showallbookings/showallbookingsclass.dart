@@ -23,22 +23,14 @@ class Booking {
     final user = json['user'];
     final room = json['room'];
     return Booking(
-       id: json['id'],
-       name: "${user['first_name']} ${user['last_name']}", // Combine first and last name
-       checkInDate: json['check_in_date'],
-       checkOutDate: json['check_out_date'],
-       numAdults: json['num_adults'],
+      id: json['id'],
+      name: "${user['first_name']} ${user['last_name']}", // Combine first and last name
+      checkInDate: json['check_in_date'],
+      checkOutDate: json['check_out_date'],
+      numAdults: json['num_adults'],
       numChildren: json['num_children'],
       paymentMethod: json['payment_method'],
       paymentStatus: json['payment_status'],
-      //id: 'cv',
-      //name: 'cv',
-      //checkInDate:'cv',
-      //checkOutDate:'cv',
-      //numAdults: 'cv',
-      // numChildren: 'cv',
-      // paymentMethod: 'cv',
-      // paymentStatus: 'cv',
     );
   }
 }

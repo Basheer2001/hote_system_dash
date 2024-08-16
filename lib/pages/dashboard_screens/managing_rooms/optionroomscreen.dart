@@ -17,7 +17,7 @@ class OptionScreen extends StatelessWidget {
     AdminAllRooms(),
     AdminRoomDetails(),
     AdminCreateRoom(),
-    AdminDeleteRoom(),
+    DeleteRoom(),
     AdminUpdateRoom(),
     RoomSearch(),
   ];

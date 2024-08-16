@@ -9,7 +9,7 @@ class ShowSomeonereportRepo extends GetxService {
   APIProvider apiProvider = Get.find<APIProvider>(); // Assuming you have an APIProvider setup
   MyServices myServices=Get.find();
 
-  Future<AppResponse<List<Map<String, dynamic>>>> getUserReports(int userId) async {
+  Future<AppResponse<List<Map<String, dynamic>>>> getUserReports(String userId) async {
     try {
       dio.Response response = await apiProvider.getRequest(
         "${APIProvider.url}dashboard/users/$userId/reports",
@@ -21,7 +21,7 @@ class ShowSomeonereportRepo extends GetxService {
       );
 
       if (response.statusCode == 200 && response.data != null) {
-        List<Map<String, dynamic>> reportsList = List<Map<String, dynamic>>.from(response.data);
+        List<Map<String, dynamic>> reportsList = List<Map<String, dynamic>>.from(response.data["data"]);
         return AppResponse<List<Map<String, dynamic>>>(
           success: true,
           data: reportsList,
@@ -32,7 +32,8 @@ class ShowSomeonereportRepo extends GetxService {
           errorMessage: response.data["msg"] ?? "Error fetching user reports",
         );
       }
-    } catch (e) {
+    }
+    catch (e) {
       print("Error during user reports fetch: $e");
       return AppResponse<List<Map<String, dynamic>>>(
         success: false,

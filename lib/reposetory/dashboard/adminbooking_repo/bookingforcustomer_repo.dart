@@ -8,12 +8,12 @@ class BookingForCustomerRepo extends GetxService {
   final APIProvider apiProvider = Get.find<APIProvider>();
 
   Future<AppResponse<Map<String, dynamic>>> createBooking({
-    required int roomId,
-    required int userId,
+    required String roomId,
+    required String userId,
     required String checkInDate,
     required String checkOutDate,
-    required int numAdults,
-    required int numChildren,
+    required String numAdults,
+    required String numChildren,
     required String paymentMethod,
   }) async {
     try {
@@ -31,8 +31,10 @@ class BookingForCustomerRepo extends GetxService {
         "${APIProvider.url}dashboard/create/forCustomer",
         {},
         formData,
+        cookies: APIProvider.cookies?.first,
       );
 
+      APIProvider.cookies = response.headers['set-cookie'];
 
       print("Response status code: ${response.statusCode}");
       print("Response body: ${response.data}");

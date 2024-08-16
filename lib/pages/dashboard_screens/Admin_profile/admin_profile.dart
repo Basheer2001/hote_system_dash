@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dashboardhs/pages/dashboard_screens/Admin_profile/updateprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/adminprofile_controller/adminprofile_controller.dart';
@@ -45,7 +46,7 @@ class AdminProfile extends StatelessWidget {
                     SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
-                       // Get.to(() => UpdateProfile());
+                        Get.to(() => UpdateProfile());
                       },
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF003398)),

@@ -11,7 +11,7 @@ class ShowSomeonereportController extends GetxController {
   var loading = false.obs;
   var errorMessage = ''.obs;
 
-  void fetchUserReports(int userId) async {
+  void fetchUserReports(String userId) async {
     loading.value = true;
     AppResponse<List<Map<String, dynamic>>> response = await userReportsRepo.getUserReports(userId);
     loading.value = false;

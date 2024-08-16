@@ -21,7 +21,7 @@ class ViewAllUsersRepo extends GetxService {
       );
 
       if (response.statusCode == 200 && response.data != null) {
-        List<Map<String, dynamic>> usersList = List<Map<String, dynamic>>.from(response.data);
+        List<Map<String, dynamic>> usersList = List<Map<String, dynamic>>.from(response.data["data"]);
         return AppResponse<List<Map<String, dynamic>>>(
           success: true,
           data: usersList,

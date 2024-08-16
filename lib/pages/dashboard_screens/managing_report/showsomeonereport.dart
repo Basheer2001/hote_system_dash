@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../controllers/managingreports_controller/showsomeonereport_controller.dart'; // Adjust this import as per your project structure
 
 class ShowSomeonereportScreen extends StatelessWidget {
-  final int userId;
+  final String userId;
   final ShowSomeonereportController controller = Get.put(ShowSomeonereportController());
 
   ShowSomeonereportScreen({required this.userId});

@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../models/appresponse.dart';
 import '../../reposetory/dashboard/adminreport_repo/checkmultiplereports_repo.dart';
 
@@ -11,7 +10,8 @@ class CheckMultipleReportsController extends GetxController {
   var errorMessage = ''.obs;
   var successMessage = ''.obs;
 
-  Future<void> updateReports(List<int> reportIds) async {
+  //Future<void> updateReports(List<int> reportIds) async {
+  Future<void> updateReports(String reportIds) async {
     try {
       isLoading.value = true;
       errorMessage.value = '';

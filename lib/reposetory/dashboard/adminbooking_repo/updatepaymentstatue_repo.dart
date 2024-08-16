@@ -7,42 +7,33 @@ import '../../../models/appresponse.dart';
 import '../../../providers/apiprovider.dart';
 import '../../../service.dart';
 
-class UpdateBookingStatueRepo extends GetxService {
-  final APIProvider apiProvider = Get.find<APIProvider>();
-  final MyServices myServices = Get.find<MyServices>();
+class PaymentStatusRepo extends GetxService {
+  APIProvider apiProvider = Get.find<APIProvider>();
+  MyServices myServices = Get.find();
 
-
-  Future<AppResponse<void>> updatePaymentStatus(int bookingId, String status) async {
+  Future<AppResponse<Map<String, dynamic>>> updatePaymentStatus(String bookingId, String paymentStatus) async {
     try {
+      String url = "${APIProvider.url}dashboard/bookings/$bookingId/payment-status";
       dio.Response response = await apiProvider.putRequest(
-        "${APIProvider.url}dashboard/bookings/$bookingId/payment-status",
-        {},
-        {'status': status},
-        // headers: {
-        //   'Authorization': 'Bearer ${myServices.sharedPreferences.getString("token")}',
-        // },
+        url,
+        {"payment_status": paymentStatus},
+        null, // Assuming no additional headers are required
       );
 
-      if (response.statusCode == 200) {
-        return AppResponse<void>(success: true);
+      if (response.statusCode == 200 && response.data != null) {
+        return AppResponse<Map<String, dynamic>>(
+          success: true,
+          data: response.data,
+        );
       } else {
-        return AppResponse<void>(
+        return AppResponse<Map<String, dynamic>>(
           success: false,
           errorMessage: response.data["msg"] ?? "Error updating payment status",
         );
       }
-    } on dio.DioException catch (e) {
-      print("Dio error during payment status update: $e");
-      String errorMessage = "Network error occurred";
-      if (e.response != null) {
-        errorMessage = "Server error: ${e.response!.statusCode}";
-      }
-      return AppResponse(success: false, errorMessage: errorMessage);
-    } catch (e) {
+    } on Exception catch (e) {
       print("Error during payment status update: $e");
       return AppResponse(success: false, errorMessage: e.toString());
     }
   }
-
-
 }

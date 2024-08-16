@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/appresponse.dart';
+import '../../pages/dashboard_screens/dashboard_screen.dart';
 import '../../reposetory/dashboard/adminprofile_repo/loginadmin_repo.dart';
 
 class loginAdminController extends GetxController{
@@ -49,7 +50,7 @@ class loginAdminController extends GetxController{
       if(response.success){
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('token', response.data);
-        //Get.to(() => HotelHome(token: response.data));
+        Get.to(() => DashboardScreen());
         Get.defaultDialog(
             title: "Success",
             content: Text(""),

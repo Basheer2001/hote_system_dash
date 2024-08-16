@@ -1,8 +1,13 @@
+
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../models/appresponse.dart';
+import '../../pages/dashboard_screens/dashboard_screen.dart';
 import '../../reposetory/dashboard/adminprofile_repo/adminprofilerepo.dart';
 
 
@@ -11,6 +16,14 @@ class AdminProfileController extends GetxController{
   AdminProfileRepo adminprofileRepo=Get.find<AdminProfileRepo>();
 
   GlobalKey<FormState> formKey=GlobalKey<FormState>();
+
+  TextEditingController firstnameTextController=TextEditingController(text:"marloo");
+  TextEditingController lastnameTextController=TextEditingController(text:"bb");
+  TextEditingController phoneTextController=TextEditingController(text:"111");
+  TextEditingController newpasswordTextController=TextEditingController(text:"87654321");
+  TextEditingController  newpasswordconfirmation=TextEditingController(text:"87654321");
+  TextEditingController  currentpassword=TextEditingController(text:"87654321");
+  TextEditingController  address=TextEditingController(text:"321");
 
 
 
@@ -61,20 +74,55 @@ class AdminProfileController extends GetxController{
   }
 
 
+  void updateprofile() async {
+    firstSubmit.value = true;
+    if (formKey.currentState!.validate()) {
+      loginLoadingState.value = true;
+      File? imageFile;
+      if (avatarImagePath.value.isNotEmpty) {
+        imageFile = File(avatarImagePath.value);
+      } //
+      AppResponse response = await adminprofileRepo.updateprofile(
+          photo: imageFile, firstnameTextController.text,
+          lastnameTextController.text,
+          phoneTextController.text, newpasswordTextController.text,
+          newpasswordconfirmation.text, currentpassword.text, address.text
 
-
-
-
-
-
-
-  void pickImage(BuildContext context) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      avatarImagePath.value = pickedFile.path;
-      // image = File(pickedFile.path);
+      );
+      loginLoadingState.value = false;
+      if (response.success) {
+        Get.to(() => DashboardScreen());
+        Get.defaultDialog(
+            title: "Success",
+            content: Text(""),
+            actions: [
+              TextButton(onPressed: () {
+                Get.back();
+              },
+                  child: Text("ok")),
+            ]
+        );
+      } else {
+        Get.defaultDialog(
+            title: "Error",
+            content: Text(response.errorMessage!),
+            actions: [
+              TextButton(onPressed: () {
+                Get.back();
+              },
+                  child: Text("ok")),
+            ]
+        );
+      }
     }
-  }
 
-}
+
+    void pickImage(BuildContext context) async {
+      final picker = ImagePicker();
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+      if (pickedFile != null) {
+        avatarImagePath.value = pickedFile.path;
+        // image = File(pickedFile.path);
+      }
+    }
+  }}

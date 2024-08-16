@@ -23,7 +23,7 @@ class AdminRoomRepo extends GetxService {
       );
 
       if (response.statusCode == 200 && response.data['status']) {
-        return RoomDetail.fromJson(response.data);
+        return RoomDetail.fromJson(response.data['data']);
       } else {
         throw Exception('Failed to fetch room details');
       }
@@ -44,7 +44,7 @@ class AdminRoomRepo extends GetxService {
       );
 
       if (response.statusCode == 200 && response.data['status']) {
-        List<dynamic> roomsJson = response.data;
+        List<dynamic> roomsJson = response.data['data'];
         return roomsJson.map((json) => RoomDetail.fromJson(json)).toList();
       } else {
         throw Exception('Failed to fetch rooms');

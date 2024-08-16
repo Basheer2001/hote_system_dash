@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:dashboardhs/pages/dashboard_screens/managing_rooms/serachroomclass.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../models/appresponse.dart';
 import '../../reposetory/dashboard/adminroom_repo/cdroom_repo.dart';
 
@@ -8,6 +11,7 @@ class CDRoomController extends GetxController {
   final CDRoomRepo cdRoomRepo = Get.find<CDRoomRepo>();
 
   RxBool isLoading = false.obs;
+  var avatarImagePath = ''.obs;
 
   void deleteRoom(int roomId) async {
     isLoading.value = true;
@@ -42,7 +46,6 @@ class CDRoomController extends GetxController {
   TextEditingController statusTextController = TextEditingController();
   TextEditingController roomNumberTextController = TextEditingController();
   TextEditingController roomClassIdTextController = TextEditingController();
-  TextEditingController photoTextController = TextEditingController();
   TextEditingController viewTextController = TextEditingController();
 
 
@@ -54,16 +57,19 @@ class CDRoomController extends GetxController {
       String floor = floorTextController.text;
       String status = statusTextController.text;
       String roomNumber = roomNumberTextController.text;
-      int roomClassId = int.tryParse(roomClassIdTextController.text) ?? 0;
-      String photo = photoTextController.text;
+     // int roomClassId = int.tryParse(roomClassIdTextController.text) ?? 0;
+      String roomClassId = roomClassIdTextController.text;
       String view = viewTextController.text;
-
+      File? imageFile;
+      if (avatarImagePath.value.isNotEmpty) {
+        imageFile = File(avatarImagePath.value);
+      }
       AppResponse<Room> response = await cdRoomRepo.createRoom(
         floor: floor,
         status: status,
         roomNumber: roomNumber,
         roomClassId: roomClassId,
-        photo: photo,
+        photo: imageFile,
         view: view,
       );
 
@@ -85,6 +91,15 @@ class CDRoomController extends GetxController {
           ],
         );
       }
+    }
+
+  }
+  void pickImage(BuildContext context) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      avatarImagePath.value = pickedFile.path;
+      // image = File(pickedFile.path);
     }
   }
 }

@@ -6,9 +6,10 @@ import '../../contsant/routes.dart';
 import 'Admin_profile/admin_profile.dart';
 import 'manage_bookings/optionbookingscreen.dart';
 import 'managing_report/checkmultipereports.dart';
-import 'managing_report/showactivereport.dart';
+import 'managing_report/reports1.dart';
 import 'managing_report/showsomeonereport.dart';
 import 'managing_rooms/optionroomscreen.dart';
+import 'managing_services/optionservicescreen.dart';
 import 'managing_users/optionuserscreen.dart';
 
 
@@ -48,7 +49,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       case 6:
         Get.to(()=>OptionBookingScreen());
         break;
+      case 7:
+        Get.to(()=>OptionServcieScreen());
+        break;
       default:
+
+
         break;
     }
   }
@@ -95,6 +101,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   NavigationRailDestination(
                     icon: Icon(Icons.book),
                     label: Text("Bookings"),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.room_service),
+                    label: Text("Services"),
                   ),
                 ],
                 selectedIndex: _selectedIndex,

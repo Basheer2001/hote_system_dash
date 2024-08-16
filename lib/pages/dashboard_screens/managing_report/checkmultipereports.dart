@@ -7,7 +7,7 @@ import '../../../controllers/managingreports_controller/checkmultiplereports_con
 
 class ReportUpdateScreen extends StatelessWidget {
   final CheckMultipleReportsController reportUpdateController = Get.put(CheckMultipleReportsController());
-
+ TextEditingController useridcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,9 +27,17 @@ class ReportUpdateScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.red),
                 ),
                 SizedBox(height: 20),
+                TextFormField(
+                  controller: useridcontroller,
+                  style:TextStyle(
+
+                  ),
+
+                ),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    reportUpdateController.updateReports([4, 3]);
+                    reportUpdateController.updateReports(useridcontroller.text);
                   },
                   child: Text('Retry'),
                 ),
@@ -44,20 +52,41 @@ class ReportUpdateScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.green),
                 ),
                 SizedBox(height: 20),
+                TextFormField(
+                  controller: useridcontroller,
+                  style:TextStyle(
+
+                  ),
+
+                ),
+                SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    reportUpdateController.updateReports([4, 3]);
+                    reportUpdateController.updateReports(useridcontroller.text);
                   },
                   child: Text('Update Reports Again'),
                 ),
               ],
             );
           } else {
-            return ElevatedButton(
-              onPressed: () {
-                reportUpdateController.updateReports([4, 3]);
-              },
-              child: Text('Update Reports'),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  controller: useridcontroller,
+                  style:TextStyle(
+
+                  ),
+
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    reportUpdateController.updateReports(useridcontroller.text);
+                  },
+                  child: Text('Update Reports'),
+                ),
+              ],
             );
           }
         }),

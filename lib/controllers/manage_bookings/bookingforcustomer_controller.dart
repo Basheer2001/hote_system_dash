@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../models/appresponse.dart';
 import '../../reposetory/dashboard/adminbooking_repo/bookingforcustomer_repo.dart';
-//
+
 class BookingForCustomerController extends GetxController {
   final BookingForCustomerRepo bookingRepo = Get.find<BookingForCustomerRepo>();
 
@@ -23,12 +23,12 @@ class BookingForCustomerController extends GetxController {
       bookingLoadingState.value = true;
 
       AppResponse<Map<String, dynamic>> response = await bookingRepo.createBooking(
-        roomId: int.parse(roomIdController.text),
-        userId: int.parse(userIdController.text),
+        roomId: roomIdController.text,
+        userId: userIdController.text,
         checkInDate: checkInDateController.text,
         checkOutDate: checkOutDateController.text,
-        numAdults: int.parse(numAdultsController.text),
-        numChildren: int.parse(numChildrenController.text),
+        numAdults:numAdultsController.text,
+        numChildren: numChildrenController.text,
         paymentMethod: paymentMethodController.text,
       );
 

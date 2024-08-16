@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/managingrooms_controller/updateroom_controller.dart';
+import 'dart:io';
 
 class AdminUpdateRoom extends StatelessWidget {
   final UpdateRoomController controller = Get.put(UpdateRoomController());
 
-  final TextEditingController floorController = TextEditingController();
-  final TextEditingController statusController = TextEditingController();
-  final TextEditingController roomNumberController = TextEditingController();
-  final TextEditingController roomClassIdController = TextEditingController();
-  final TextEditingController averageRatingController = TextEditingController();
-  final TextEditingController photoController = TextEditingController();
-  final TextEditingController viewController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +17,24 @@ class AdminUpdateRoom extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
+            Obx(() => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: controller.avatarImagePath.value.isEmpty
+                      ? null
+                      : FileImage(File(controller.avatarImagePath.value)),
+                  child: IconButton(
+                    icon: Icon(Icons.camera_alt),
+                    onPressed: () => controller.pickImage(context),
+                  ),
+                ),
+              ],
+            )),
+
             TextField(
-              controller: floorController,
+              controller: controller.floorTextController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Floor',
@@ -33,7 +43,7 @@ class AdminUpdateRoom extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             TextField(
-              controller: statusController,
+              controller: controller.statusTextController,
               decoration: InputDecoration(
                 labelText: 'Status',
                 border: OutlineInputBorder(),
@@ -41,7 +51,7 @@ class AdminUpdateRoom extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             TextField(
-              controller: roomNumberController,
+              controller: controller.roomnumberTextController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Room Number',
@@ -50,7 +60,7 @@ class AdminUpdateRoom extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             TextField(
-              controller: roomClassIdController,
+              controller: controller.roomclassidTextController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Room Class ID',
@@ -59,7 +69,7 @@ class AdminUpdateRoom extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             TextField(
-              controller: averageRatingController,
+              controller: controller.averageratingTextController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 labelText: 'Average Rating',
@@ -67,33 +77,26 @@ class AdminUpdateRoom extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.0),
+            // TextField(
+            //   controller: photoController,
+            //   decoration: InputDecoration(
+            //     labelText: 'Photo URL',
+            //     border: OutlineInputBorder(),
+            //   ),
+            // ),SizedBox(height: 16.0),
             TextField(
-              controller: photoController,
-              decoration: InputDecoration(
-                labelText: 'Photo URL',
-                border: OutlineInputBorder(),
-              ),
-            ),SizedBox(height: 16.0),
-            TextField(
-              controller: viewController,
+              controller: controller.viewcontroller,
               decoration: InputDecoration(
                 labelText: 'view',
                 border: OutlineInputBorder(),
               ),
             ),
+
             SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () {
-                controller.updateRoom(
-                  roomId: 2, // Replace with the actual room ID
-                 // floor: int.parse(floorController.text),
-                  floor: floorController.text,
-                  status: statusController.text,
-                  roomNumber: int.parse(roomNumberController.text),
-                  roomClassId: int.parse(roomClassIdController.text),
-                  averageRating: double.parse(averageRatingController.text),
-                 // photo: photoController.text,
-                  view: viewController.text,
+                controller.roomupdate(
+
                 );
               },
               style: ButtonStyle(

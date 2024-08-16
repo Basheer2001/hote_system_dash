@@ -15,34 +15,40 @@ class CreateBookingForAdmin extends StatelessWidget {
           key: controller.formKey,
           child: Column(
             children: [
+
               TextFormField(
                 controller: controller.roomIdController,
                 decoration: InputDecoration(labelText: "Room ID",  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.number,
                 validator: (value) => value!.isEmpty ? "Room ID is required" : null,
               ),
+              SizedBox(height: 20,),
               TextFormField(
                 controller: controller.checkInDateController,
                 decoration: InputDecoration(labelText: "Check-In Date",  border: OutlineInputBorder(),),
                 validator: (value) => value!.isEmpty ? "Check-In Date is required" : null,
               ),
+              SizedBox(height: 20,),
               TextFormField(
                 controller: controller.checkOutDateController,
                 decoration: InputDecoration(labelText: "Check-Out Date",  border: OutlineInputBorder(),),
                 validator: (value) => value!.isEmpty ? "Check-Out Date is required" : null,
               ),
+              SizedBox(height: 20,),
               TextFormField(
                 controller: controller.numAdultsController,
                 decoration: InputDecoration(labelText: "Number of Adults",  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.number,
                 validator: (value) => value!.isEmpty ? "Number of Adults is required" : null,
               ),
+              SizedBox(height: 20,),
               TextFormField(
                 controller: controller.numChildrenController,
                 decoration: InputDecoration(labelText: "Number of Children",  border: OutlineInputBorder(),),
                 keyboardType: TextInputType.number,
                 validator: (value) => value!.isEmpty ? "Number of Children is required" : null,
               ),
+              SizedBox(height: 20,),
               TextFormField(
                 controller: controller.paymentMethodController,
                 decoration: InputDecoration(labelText: "Payment Method",  border: OutlineInputBorder(),),
