@@ -32,6 +32,7 @@ import 'package:dashboardhs/reposetory/dashboard/adminuser_repo/viewallusers_rep
 import 'package:dashboardhs/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'controllers/manage_bookings/downloadpdf_controller.dart';
 import 'controllers/manage_bookings/searchbooking_controller/searchbookings_controller.dart';
 import 'controllers/manage_bookings/updatebookingstatue.dart';
@@ -104,6 +105,8 @@ class AppBinding extends Bindings{
 
 
   void main() async{
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  pref.clear();
   WidgetsFlutterBinding.ensureInitialized();
   AppBinding().dependencies();
   await initialServices();
